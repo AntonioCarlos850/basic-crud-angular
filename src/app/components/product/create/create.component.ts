@@ -18,13 +18,26 @@ export class CreateComponent {
     price: 0
   }
 
+  photo: any
+
   constructor(
     protected service: ProductService,
     protected router: Router,
   ) {}
 
+  onFileSelected(event: any) {
+    this.photo = event.target.files[0];
+
+    let reader = new FileReader();
+    reader.onload = (e: any) => {
+      this.product.photo = e.target.result
+    };
+
+    reader.readAsDataURL(this.photo);
+  }
+
   save(){
-    this.service.store(this.product).subscribe(() => {
+    this.service.store(this.product, this.photo).subscribe(() => {
       this.router.navigate([""])
     });
   }
