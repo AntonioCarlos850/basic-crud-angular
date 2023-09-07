@@ -1,0 +1,20 @@
+<div class="p-5 container-fluid">
+  <div class="row">
+    <small class="p-2 back d-inline w-auto" routerLink="">Voltar</small>
+  </div>
+  <section class="row p-5 bg-light w-100">
+    <div class="col-3">
+      <img src="{{product.photo}}" alt="foto do produto{{product.name}}">
+    </div>
+    <div class="col-9">
+      <h1 class="h4 mb-0">{{product.name}}</h1>
+      <small class="text-muted">{{product.brand}}</small>
+      <h2 class="h2 mt-3">${{product.price}}</h2>
+    </div>
+    <h2 class="h5 border-top pt-3">Detalhes</h2>
+    <p class="col-12">
+      {{product.description}}
+    </p>
+  </section>
+</div>
+

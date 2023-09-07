@@ -1,0 +1,11 @@
+.back{
+  cursor: pointer;
+}
+
+.back:hover{
+  color: cadetblue;
+}
+
+.row{
+  --bs-gutter-x: 0;
+}
