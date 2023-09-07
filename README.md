@@ -28,3 +28,7 @@ cd /usr/app && npm start
 ```
 
 Após isso acesse `http://localhost:3002`
+
+## OBS
+
+A API precisa estar na porta 80
