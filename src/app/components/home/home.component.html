@@ -1,0 +1,17 @@
+<section class="row">
+    <div class="col-12 d-flex justify-content-between mb-4">
+        <h1 class="d-inline">Produtos</h1>
+        <button class="btn btn-primary" routerLink="product/create">Criar Produto</button>
+    </div>
+    <div class="col-12" *ngIf="products.length > 0, else noneProduct">
+        <div class="row">
+          <div class="col-3" *ngFor="let product of products">
+            <app-card [product]="product" ></app-card>
+          </div>
+        </div>
+    </div>
+</section>
+
+<ng-template #noneProduct>
+  <h2>Nenhum produto cadastrado</h2>
+</ng-template>
