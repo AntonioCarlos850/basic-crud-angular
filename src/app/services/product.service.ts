@@ -22,7 +22,7 @@ export class ProductService {
     return this.http.get<Product>(`${this.url}/${id}`)
   }
 
-  private mountBody(product: Product, photo: File):FormData {
+  private mountBody(product: Product, photo: File | null):FormData {
     const formData = new FormData();
     if (photo) {
         formData.append("photo", photo);
@@ -31,7 +31,6 @@ export class ProductService {
     formData.append('brand', product.brand);
     formData.append('description', product.description);
     formData.append('name', product.name);
-    formData.append('photo', product.photo);
     formData.append('price', product.price.toString());
 
     return formData
@@ -41,8 +40,8 @@ export class ProductService {
     return this.http.post<Product>(this.url, this.mountBody(product, photo))
   }
 
-  update(product: Product): Observable<Product> {
-    return this.http.put<Product>(`${this.url}/${product.id}`, product)
+  update(product: Product, photo: File): Observable<Product> {
+    return this.http.post<Product>(`${this.url}/${product.id}`, this.mountBody(product, photo))
   }
 
   delete(product: Product) {
