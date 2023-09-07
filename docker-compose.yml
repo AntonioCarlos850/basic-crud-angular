@@ -1,0 +1,11 @@
+version: '2'
+services:
+  front:
+    build: .
+    volumes:
+      - .:/usr/app/
+      - /usr/app/node_modules
+    expose:
+      - 4200
+    ports:
+      - "3002:4200"
