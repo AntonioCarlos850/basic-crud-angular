@@ -18,12 +18,23 @@ export class EditComponent implements OnInit{
     price: 0
   }
 
+  photo: any
+
   constructor(
     protected service: ProductService,
     protected router: Router,
     protected route: ActivatedRoute
-  ){
+  ){ }
 
+  onFileSelected(event: any) {
+    this.photo = event.target.files[0];
+
+    let reader = new FileReader();
+    reader.onload = (e: any) => {
+      this.product.photo = e.target.result
+    };
+
+    reader.readAsDataURL(this.photo);
   }
   ngOnInit(): void {
     const id = parseInt(this.route.snapshot.paramMap.get("id")!)
@@ -33,7 +44,7 @@ export class EditComponent implements OnInit{
   }
 
   save(){
-    this.service.update(this.product).subscribe(() => {
+    this.service.update(this.product, this.photo).subscribe(() => {
       this.router.navigate([""])
     });
   }
