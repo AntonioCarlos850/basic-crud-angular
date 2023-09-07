@@ -1,27 +1,30 @@
-# BasicCrudAngular
+# CRUD
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.1.
+Esse projeto foi feito com [Angular CLI](https://github.com/angular/angular-cli) versão 14.0.0.
 
-## Development server
+Esse projeto foi feito com Node versão 16.14.2.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Requisitos
 
-## Code scaffolding
+Docker ou Node na versão 16.14.2.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+##  Rodando a aplicação
 
-## Build
+### Docker
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Execute os seguintes comandos
+```
+docker compose build
+docker compose up -d
+```
 
-## Running unit tests
+Após isso você terá um container com a aplicação, acesse ele e execute os comandos a seguir
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Docker e NodeJS
 
-## Running end-to-end tests
+Em um terminal execute
+```
+cd /usr/app && npm start
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Após isso acesse `http://localhost:3002`
