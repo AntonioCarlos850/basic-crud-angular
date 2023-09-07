@@ -15,4 +15,6 @@ export class CardComponent {
     photo: '',
     price: 0
   }
+
+  @Input() showButtons = true;
 }
