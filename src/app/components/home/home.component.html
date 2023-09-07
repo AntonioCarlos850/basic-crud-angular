@@ -5,7 +5,7 @@
     </div>
     <div class="col-12" *ngIf="products.length > 0, else noneProduct">
         <div class="row">
-          <div class="col-3" *ngFor="let product of products">
+          <div class="col-3 mb-3" *ngFor="let product of products">
             <app-card [product]="product" ></app-card>
           </div>
         </div>
