@@ -22,8 +22,23 @@ export class ProductService {
     return this.http.get<Product>(`${this.url}/${id}`)
   }
 
-  store(product: Product): Observable<Product> {
-    return this.http.post<Product>(this.url, product)
+  private mountBody(product: Product, photo: File):FormData {
+    const formData = new FormData();
+    if (photo) {
+        formData.append("photo", photo);
+    }
+
+    formData.append('brand', product.brand);
+    formData.append('description', product.description);
+    formData.append('name', product.name);
+    formData.append('photo', product.photo);
+    formData.append('price', product.price.toString());
+
+    return formData
+  }
+
+  store(product: Product, photo: File): Observable<Product> {
+    return this.http.post<Product>(this.url, this.mountBody(product, photo))
   }
 
   update(product: Product): Observable<Product> {
