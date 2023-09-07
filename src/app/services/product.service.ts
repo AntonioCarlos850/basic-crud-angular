@@ -14,8 +14,8 @@ export class ProductService {
     private http: HttpClient
   ) { }
 
-  all(): Observable<List<Product>> {
-    return this.http.get<List<Product>>(this.url)
+  all(page: number = 1): Observable<List<Product>> {
+    return this.http.get<List<Product>>(`${this.url}?page=${page}`)
   }
 
   find(id: number): Observable<Product> {
