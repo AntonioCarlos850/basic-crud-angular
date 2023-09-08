@@ -16,5 +16,7 @@ export class CardComponent {
     price: 0
   }
 
+  @Input() photo = null
+
   @Input() showButtons = true;
 }

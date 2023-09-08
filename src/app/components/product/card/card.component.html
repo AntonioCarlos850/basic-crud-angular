@@ -1,7 +1,7 @@
 <div class="card" style="width: 18rem;" routerLink="product/show/{{product.id}}">
     <div class="row w-100 justify-content-center" style="--bs-gutter-x:0;">
       <div class="col-9 py-2">
-        <img src="{{product.photo}}" class="card-img-top" alt="{{product.name}} foto">
+        <img src="{{photo ? photo : product.photo}}" class="card-img-top" alt="{{product.name}} foto">
       </div>
     </div>
     <div class="card-body">
