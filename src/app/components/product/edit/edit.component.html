@@ -13,7 +13,7 @@
     </div>
     <div class="mb-3">
       <label for="price" class="form-label">Preço</label>
-      <input type="number" step="0.01" min="1" required class="form-control" id="price" formControlName="price">
+      <input type="number" step="0.01" min="0.01" required class="form-control" id="price" formControlName="price">
       <div class="text-danger" *ngIf="form.get('price')?.errors?.['required'] && form.get('price')?.touched">
         Preço é obrigatório
       </div>
