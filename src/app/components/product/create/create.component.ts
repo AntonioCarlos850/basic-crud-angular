@@ -13,6 +13,7 @@ export class CreateComponent implements OnInit {
   form!: FormGroup
 
   photo: any
+  photoUrl: any
 
   constructor(
     protected service: ProductService,
@@ -29,16 +30,16 @@ export class CreateComponent implements OnInit {
         Validators.min(0.01),
         Validators.required
       ])],
-      photo: ['']
+      photo: [''],
+      id: [0]
     })
   }
 
   onFileSelected(event: any) {
-    this.photo = event.target.files[0];
-
+    this.photo = event.target.files[0]
     let reader = new FileReader();
     reader.onload = (e: any) => {
-      this.form.setValue({photo: e.target.result})
+      this.photoUrl = e.target.result
     };
 
     reader.readAsDataURL(this.photo);
