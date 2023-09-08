@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import Product from 'src/app/interfaces/product';
 import { ProductService } from 'src/app/services/product.service';
@@ -8,37 +9,46 @@ import { ProductService } from 'src/app/services/product.service';
   templateUrl: './create.component.html',
   styleUrls: ['./create.component.css']
 })
-export class CreateComponent {
-  product: Product = {
-    id: 1,
-    brand: '',
-    description: '',
-    name: '',
-    photo: '',
-    price: 0
-  }
+export class CreateComponent implements OnInit {
+  form!: FormGroup
 
   photo: any
 
   constructor(
     protected service: ProductService,
     protected router: Router,
+    private builder: FormBuilder
   ) {}
+
+  ngOnInit(): void {
+    this.form = this.builder.group({
+      brand: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+      name: ['', [Validators.required]],
+      price: [0, Validators.compose([
+        Validators.min(0.01),
+        Validators.required
+      ])],
+      photo: ['']
+    })
+  }
 
   onFileSelected(event: any) {
     this.photo = event.target.files[0];
 
     let reader = new FileReader();
     reader.onload = (e: any) => {
-      this.product.photo = e.target.result
+      this.form.setValue({photo: e.target.result})
     };
 
     reader.readAsDataURL(this.photo);
   }
 
   save(){
-    this.service.store(this.product, this.photo).subscribe(() => {
-      this.router.navigate([""])
-    });
+    if (this.form.valid) {
+      this.service.store(this.form.value, this.photo).subscribe(() => {
+        this.router.navigate([""])
+      });
+    }
   }
 }

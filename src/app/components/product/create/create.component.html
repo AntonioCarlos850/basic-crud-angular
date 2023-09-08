@@ -1,31 +1,46 @@
-<form class="row">
+<form class="row" [formGroup]="form">
   <div class="col-12 col-md-6">
     <div class="mb-3">
       <label for="photo" class="form-label">Foto do produto</label>
-      <input class="form-control" type="file" id="photo" name="photo" (change)="onFileSelected($event)">
+      <input class="form-control" type="file" id="photo" formControlName="photo" (change)="onFileSelected($event)">
     </div>
     <div class="mb-3">
       <label for="name" class="form-label">Nome</label>
-      <input type="text" class="form-control" required id="name" name="name" [(ngModel)]="product.name">
+      <input type="text" class="form-control" required id="name" formControlName="name">
+      <div class="text-danger" *ngIf="form.get('name')?.errors?.['required'] && form.get('name')?.touched">
+        Nome é obrigatório
+      </div>
     </div>
     <div class="mb-3">
       <label for="price" class="form-label">Preço</label>
-      <input type="number" step="0.01" min="1" required class="form-control" id="price" name="price" [(ngModel)]="product.price">
+      <input type="number" step="0.01" min="0.01" required class="form-control" id="price" formControlName="price">
+      <div class="text-danger" *ngIf="form.get('price')?.errors?.['required'] && form.get('price')?.touched">
+        Preço é obrigatório
+      </div>
+      <div class="text-danger" *ngIf="form.get('price')?.errors?.['min'] && form.get('price')?.touched">
+        Preço precisa ser maior que 0
+      </div>
     </div>
     <div class="mb-3">
       <label for="description" class="form-label">Descrição</label>
-      <textarea class="form-control" required name="description" id="description" rows="5" [(ngModel)]="product.description"></textarea>
+      <textarea class="form-control" required formControlName="description" id="description" rows="5"></textarea>
+      <div class="text-danger" *ngIf="form.get('description')?.errors?.['required'] && form.get('description')?.touched">
+        Descrição é obrigatória
+      </div>
     </div>
     <div class="mb-3">
       <label for="brand" class="form-label">Marca</label>
-      <input type="text" class="form-control" required id="brand" name="brand" [(ngModel)]="product.brand">
+      <input type="text" class="form-control" required id="brand" formControlName="brand">
+      <div class="text-danger" *ngIf="form.get('brand')?.errors?.['required'] && form.get('brand')?.touched">
+        Marca é obrigatória
+      </div>
     </div>
   </div>
   <div class="col-12 col-md-6 d-flex justify-content-center">
-    <app-card [product]="product" [showButtons]="false"></app-card>
+    <app-card [product]="form.value" [showButtons]="false"></app-card>
   </div>
   <div class="d-flex justify-content-center mt-3">
-    <button type="submit" class="btn btn-primary me-5" (click)="save()" >Salvar</button>
+    <button type="submit" class="btn btn-primary me-5" (click)="save()" [disabled]="form.invalid">Salvar</button>
     <button type="submit" class="btn btn-primary" routerLink="">Cancelar</button>
   </div>
 </form>
